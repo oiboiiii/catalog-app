@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Tariff from "./tariff";
 import styles from "./tariffList.module.css";
 
 function TariffList() {
+
+  const [selectedTariff, setSelectedTariff] = useState(null);
+
   const tariffs = [
     {
+      id: 1,
       title: "Безлимитный 300",
       price: 300,
       speed: 10,
@@ -14,6 +18,7 @@ function TariffList() {
       },
     },
     {
+      id: 2 ,
       title: "Безлимитный 450",
       price: 450,
       speed: 50,
@@ -23,6 +28,7 @@ function TariffList() {
       },
     },
     {
+      id: 3 ,
       title: "Безлимитный 550",
       price: 550,
       speed: 100,
@@ -32,6 +38,7 @@ function TariffList() {
       },
     },
     {
+      id: 4 ,
       title: "Безлимитный 1000",
       price: 1000,
       speed: 200,
@@ -42,23 +49,19 @@ function TariffList() {
     },
   ];
 
+
+
   return (
     <div className={styles.card__list}>
-      {tariffs.map((tariff, index) => (
+      {tariffs.map((tariff) => (
         <Tariff
-          key={index}
+          key={tariff.id}
           title={tariff.title}
           price={tariff.price}
           speed={tariff.speed}
-          customStyles={
-            index === 2
-              ? {
-                  ...tariff.colors,
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                  transform: "scale(1.1)",
-                }
-              : tariff.colors
-          }
+          isSelected={selectedTariff === tariff.id}
+          onClick={() => setSelectedTariff(selectedTariff === tariff.id ? null : tariff.id)}
+          customStyles={tariff.colors}
         />
       ))}
     </div>
